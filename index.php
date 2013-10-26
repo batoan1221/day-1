@@ -1,3 +1,7 @@
+<form>
+	Input Message: <input type="text" name="txtMessage">
+	<input type ="submit" value ="Submit">
+</form>
 <?php
 	function connectToDatabase( $hostName, $databaseName, $username, $password)
 	{
