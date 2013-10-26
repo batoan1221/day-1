@@ -31,13 +31,17 @@
 	if (!empty($_GET['txtMessage']) && $message = $_GET['txtMessage']) {
 		insertMessageToDatabase($con, $message);
 	}
-	
+	if (!empty($_GET['delete_message_id']) && $messageID = $_GET['delete_message_id']) {
+		deleteMessageInDatabase($con,$messageID);
+	}
 	if ($con) {
 		$result = mysqli_query($con,"Select * from message");
 		while($row = mysqli_fetch_array($result))
 		{
-			echo $row['message_id'] . " " . $row['message_content'];
-			echo "<br>";
+			$message_id = $row['message_id'];
+			$message_content = $row['message_content'];
+			echo $message_id . " " . $message_content;
+			echo " <a href='index.php?delete_message_id=".$message_id."'>Delete</a><br>";
 		}
 	}
 
@@ -45,7 +49,8 @@
 	{
 		mysqli_query($con,"DELETE FROM message WHERE message_id = '".$messageID."'");
 	}
-	deleteMessageInDatabase($con,"4");
+	
+	// deleteMessageInDatabase($con,"4");
 	mysqli_close($con);
 
 ?>
