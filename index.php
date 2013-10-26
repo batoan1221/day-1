@@ -28,8 +28,10 @@
 	
 	$con = connectToDatabase("localhost","day1","root","");
 
-	// insertMessageToDatabase($con,"message 3");
-
+	if (!empty($_GET['txtMessage']) && $message = $_GET['txtMessage']) {
+		insertMessageToDatabase($con, $message);
+	}
+	
 	if ($con) {
 		$result = mysqli_query($con,"Select * from message");
 		while($row = mysqli_fetch_array($result))
