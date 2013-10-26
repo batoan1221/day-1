@@ -41,6 +41,11 @@
 		}
 	}
 
+	function deleteMessageInDatabase($con, $messageID)
+	{
+		mysqli_query($con,"DELETE FROM message WHERE message_id = '".$messageID."'");
+	}
+	deleteMessageInDatabase($con,"4");
 	mysqli_close($con);
 
 ?>
