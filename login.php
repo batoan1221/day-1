@@ -35,7 +35,7 @@ Password: <input type="password" name="txtPassword"> <br>
 			$row = mysqli_fetch_array($result);
 			if (!empty($row))
 			{
-				header('Location: index.php?txtUsername=$txtUsername');
+				header('Location: index.php?txtUsername='.$txtUsername);
 			}
 			else
 			{
