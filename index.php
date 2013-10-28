@@ -10,7 +10,7 @@
 		insertMessageToDatabase($db, $message);
 	}
 	if (!empty($_GET['delete_message_id']) && $messageID = $_GET['delete_message_id']) {
-		deleteMessageInDatabase($con,$messageID);
+		deleteMessageInDatabase($db,$messageID);
 	}
 	if ($db) {
 		$result = $db->query('Select * from message');
