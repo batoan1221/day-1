@@ -13,13 +13,17 @@ Password: <input type="password" name="txtPassword"> <br>
 	{
 		$txtUsername = $_GET['txtUsername'];
 		$txtPassword = $_GET['txtPassword'];
+
 		if ($db) {
-			$result = $db->query("Select * from user where username ='".$txtUsername."' and password ='".$txtPassword."'");
-			$result->execute();
+			$result = $db->prepare("Select * from user where username = ? and password = ?");
+			$data = array($txtUsername,$txtPassword );
+			$result->execute($data);
 			$result->setFetchMode(PDO::FETCH_BOTH);
 			$row = $result->fetch();
+
 			// $result = mysqli_query($con,"Select * from user where username ='".$txtUsername."' and password ='".$txtPassword."'");
 			// $row = mysqli_fetch_array($result);
+			
 			if (!empty($row))
 			{
 				header('Location: index.php?txtUsername='.$txtUsername);
