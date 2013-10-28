@@ -7,15 +7,19 @@ Password: <input type="password" name="txtPassword"> <br>
 </form>
 <?php 
 	include 'DataProvider.php';
-	$con = connectToDatabase("localhost","day1","root","");
+	$db = connectToDatabase("localhost","day1","root","");
 
 	if (!empty($_GET['txtUsername']) && !empty($_GET['txtPassword']))
 	{
 		$txtUsername = $_GET['txtUsername'];
 		$txtPassword = $_GET['txtPassword'];
-		if ($con) {
-			$result = mysqli_query($con,"Select * from user where username ='".$txtUsername."' and password ='".$txtPassword."'");
-			$row = mysqli_fetch_array($result);
+		if ($db) {
+			$result = $db->query("Select * from user where username ='".$txtUsername."' and password ='".$txtPassword."'");
+			$result->execute();
+			$result->setFetchMode(PDO::FETCH_BOTH);
+			$row = $result->fetch();
+			// $result = mysqli_query($con,"Select * from user where username ='".$txtUsername."' and password ='".$txtPassword."'");
+			// $row = mysqli_fetch_array($result);
 			if (!empty($row))
 			{
 				header('Location: index.php?txtUsername='.$txtUsername);
@@ -28,7 +32,5 @@ Password: <input type="password" name="txtPassword"> <br>
 			}
 		}
 	}
-
-	mysqli_close($con);
-
+	closeConnection($db);
 ?>

@@ -25,5 +25,5 @@
 			echo " <a href='index.php?delete_message_id=".$message_id."'>Delete</a><br>";
 		}
 	}
-
+	closeConnection($db);
 ?>
